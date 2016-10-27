@@ -27,7 +27,7 @@ public class OkHttpService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        new Thread() {
+        new Thread() { // TODO replace with smarter threading model (Executer?)
             @Override
             public void run() {
                 sendRequestToServer(true);
@@ -39,34 +39,28 @@ public class OkHttpService extends Service {
 
     private String sendRequestToServer(boolean getMode) {
         OkHttpClient client = new OkHttpClient();
+        Request request;
         Response response;
 
         if (getMode) {
-            Request request = new Request.Builder()
+            request = new Request.Builder()
                         .url(PEER_URL)
                         .build();
-            try {
-                response = client.newCall(request).execute();
-                return response.body().string();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
         else {
             // pose
             MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-
             RequestBody body = RequestBody.create(JSON, JSOT_STR);
-            Request request = new Request.Builder()
+            request = new Request.Builder()
                     .url(PEER_URL)
                     .post(body)
                     .build();
-            try {
-                response = client.newCall(request).execute();
-                return response.body().string();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        }
+        try {
+            response = client.newCall(request).execute();
+            return response.body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return null;
     }
