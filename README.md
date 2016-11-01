@@ -1,6 +1,6 @@
 # AndroidMustHaveLibs
 
-Code Examples for "An Overly Thorough Guide To Underused Android Libraries", including:
+# Code Examples for "An Overly Thorough Guide To Underused Android Libraries", including:
 
 ButterKnife – Auto-injected code will help you do away with much of your app’s boilerplate code. It’s the ultimate code injection for Android. Need I say more?
 AndroidAnnotations – Use blazing fast auto-generated classes and name-based code injection to save time with no performance penalty over hand-coded logic.
